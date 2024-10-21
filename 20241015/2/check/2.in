@@ -1,0 +1,8 @@
+:len a len(a)
+:sin x sin(x)
+sin 1
+:decorate s "--<<{}>>--".format(s)
+decorate "ЖЖЖ"
+sin 2
+len [1,2,3,4,5,6]
+quit "{}, {}"
