@@ -1,0 +1,16 @@
+class C:
+  num = Num()
+print(C().num)
+c, d = C(), C()
+print(c.num+d.num)
+c.num = [i for i in 'IwanttoflytoCuba']
+d.num=range(1,134, 2)
+print(c.num+d.num)
+d.num = 15.5
+print(d.num)
+f=C()
+f.num=0.12344
+print(c.num+d.num)
+p=C()
+print(f.num+p.num)
+print()

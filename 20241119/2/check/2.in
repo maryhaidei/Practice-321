@@ -1,0 +1,15 @@
+class C:
+  num = Num()
+
+c, d, k = C(), C(), C()
+c.num = 2
+print(c.num+d.num)
+k.num = "This is very sad string!"
+print(c.num+d.num)
+d.num = [i for i in range(0, 12334)]
+print(c.num+d.num)
+print(d.num+d.num)
+print(k.num+d.num)
+a=C()
+a.num=[str(i) for i in range(99)]
+print(a.num)

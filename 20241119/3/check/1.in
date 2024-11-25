@@ -1,0 +1,13 @@
+wo = Vowel(a=1234)
+print(wo, wo.full)
+wo.full=12334
+print(wo.full)
+wo.e =12;  wo.o =  134; wo.u = 345
+print(wo, wo.full)
+print(wo.answer)
+try:
+    wo.ww=12345
+except Exception: pass
+print(wo)
+wo.y=1578
+print(wo, wo.full, wo.answer)

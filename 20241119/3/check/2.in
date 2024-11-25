@@ -1,0 +1,12 @@
+wo = Vowel(y=22, a=12, i=3)
+print(wo, wo.full)
+wo.o = wo.u = 100500
+print(wo, wo.full)
+try:
+    wo.answer=1
+except Exception: pass
+try: 
+    print(wo.e)
+except Exception: pass
+wo.full=12
+print(wo.full)
