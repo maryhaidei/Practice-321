@@ -1,0 +1,3 @@
+11:56:20 17.12.2024 [                  git.cmd]: |  DEBUG|: Popen(['git', 'version'], cwd=/home/s02220026/Загрузки/prac/Practice-321/20241210/1/check, stdin=None, shell=False, universal_newlines=False)
+11:56:20 17.12.2024 [                  git.cmd]: |  DEBUG|: Popen(['git', 'version'], cwd=/home/s02220026/Загрузки/prac/Practice-321/20241210/1/check, stdin=None, shell=False, universal_newlines=False)
+11:56:20 17.12.2024 [ depot.database.functions]: |  DEBUG|: Stored UpdateTime: ID=Imap deliver, timestamp=2024-12-17 11:56:20.171881
