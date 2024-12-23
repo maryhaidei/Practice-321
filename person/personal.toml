@@ -1,0 +1,99 @@
+[logging]
+"console level" = "INFO"
+"file level" = "INFO"
+
+[modules]
+deliver = [
+    "git",
+]
+
+[git]
+directory = "hworker_personal"
+
+[git.users]
+"Me" = "https://github.com/maryhaidei/Practice-321.git"
+"Him" = "https://github.com/NikitM1/Practice3.git"
+
+[tasks._default]
+time_limit = 2
+
+[tasks."20240910/1"]
+open_date = 2024-09-10
+[tasks."20240917/1"]
+open_date = 2024-09-17
+[tasks."20240917/2"]
+open_date = 2024-09-17
+[tasks."20240917/3"]
+open_date = 2024-09-17
+[tasks."20240924/1"]
+open_date = 2024-09-24
+[tasks."20240924/2"]
+open_date = 2024-09-24
+[tasks."20240924/3"]
+open_date = 2024-09-24
+[tasks."20241001/1"]
+open_date = 2024-10-01
+[tasks."20241001/2"]
+open_date = 2024-10-01
+[tasks."20241001/3"]
+open_date = 2024-10-01
+[tasks."20241008/1"]
+open_date = 2024-10-08
+[tasks."20241008/2"]
+open_date = 2024-10-08
+[tasks."20241008/3"]
+open_date = 2024-10-08
+[tasks."20241015/1"]
+open_date = 2024-10-15
+[tasks."20241015/2"]
+open_date = 2024-10-15
+[tasks."20241015/3"]
+open_date = 2024-10-15
+[tasks."20241022/1"]
+open_date = 2024-10-22
+[tasks."20241022/2"]
+open_date = 2024-10-22
+[tasks."20241022/3"]
+open_date = 2024-10-22
+[tasks."20241105/1"]
+open_date = 2024-11-05
+[tasks."20241105/2"]
+open_date = 2024-11-05
+[tasks."20241105/3"]
+open_date = 2024-11-05
+[tasks."20241112/1"]
+open_date = 2024-11-12
+[tasks."20241112/2"]
+open_date = 2024-11-12
+[tasks."20241112/3"]
+open_date = 2024-11-12
+[tasks."20241119/1"]
+open_date = 2024-11-19
+[tasks."20241119/2"]
+open_date = 2024-11-19
+[tasks."20241119/3"]
+open_date = 2024-11-19
+[tasks."20241126/1"]
+open_date = 2024-11-26
+[tasks."20241126/2"]
+open_date = 2024-11-26
+[tasks."20241126/3"]
+open_date = 2024-11-26
+[tasks."20241203/1"]
+open_date = 2024-12-03
+[tasks."20241203/2"]
+open_date = 2024-12-03
+[tasks."20241210/1"]
+open_date = 2024-12-10
+[tasks."20241210/2"]
+open_date = 2024-12-10
+
+[score]
+score_directory = "scores"
+
+[check]
+directory = "hworker_check"
+
+[publish]
+course_name = "My prac"
+SECRET_KEY = "8556aa9cfdd8c8e0884d1b2568985789372281093f338caf5cc145fdb9e5f7b5"
