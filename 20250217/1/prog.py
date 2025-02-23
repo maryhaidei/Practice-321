@@ -68,3 +68,26 @@ def parse_tree_data(tree_bytes):
         kind = "tree" if mode == "40000" else "blob"
         items.append({"mode": mode, "type": kind, "filename": filename, "hash": sha_hex})
     return items
+
+def print_tree_items(items):
+    for item in items:
+        print(f"{item['type']} {item['hash']}    {item['filename']}")
+
+def walk_history(repo_dir, start_commit):
+    current = start_commit
+    while current:
+        obj_kind, commit_data = load_object(repo_dir, current)
+        if obj_kind != "commit":
+            sys.exit(f"Объект {current} не является коммитом.")
+        commit_info = extract_commit_info(commit_data)
+        tree_ref = commit_info.get("tree")
+        if not tree_ref:
+            sys.exit(f"В коммите {current} отсутствует ссылка на дерево.")
+        t_kind, tree_data = load_object(repo_dir, tree_ref)
+        if t_kind != "tree":
+            sys.exit(f"Объект {tree_ref} не является деревом.")
+        tree_items = parse_tree_data(tree_data)
+        print(f"TREE for commit {current}")
+        print_tree_items(tree_items)
+        current = commit_info["parents"][0] if commit_info["parents"] else None
+
