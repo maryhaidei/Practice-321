@@ -91,3 +91,45 @@ def walk_history(repo_dir, start_commit):
         print_tree_items(tree_items)
         current = commit_info["parents"][0] if commit_info["parents"] else None
 
+def main():
+    if len(sys.argv) < 2:
+        sys.exit("Использование программы: python script.py <путь_к_репозиторию> [имя_ветки]")
+    
+    repo_path = sys.argv[1]
+    git_folder = os.path.join(repo_path, ".git")
+    if not os.path.isdir(git_folder):
+        sys.exit("Указанный каталог не является git-репозиторием.")
+    if len(sys.argv) == 2:
+        show_git_branches(git_folder)
+        sys.exit(0)
+    
+    branch_name = sys.argv[2]
+    branch_ref = os.path.join(git_folder, "refs", "heads", branch_name)
+    if not os.path.exists(branch_ref):
+        sys.exit(f"Ветка '{branch_name}' не обнаружена.")
+    
+    with open(branch_ref, "r") as file:
+        commit_id = file.read().strip()
+    
+    kind, commit_bytes = load_object(repo_path, commit_id)
+    if kind != "commit":
+        sys.exit("Содержимое по ссылке не является коммитом.")
+    
+    commit_info = extract_commit_info(commit_bytes)
+    display_commit(commit_info)
+    
+    tree_id = commit_info.get("tree")
+    if not tree_id:
+        sys.exit("В коммите отсутствует ссылка на дерево.")
+    
+    t_kind, tree_bytes = load_object(repo_path, tree_id)
+    if t_kind != "tree":
+        sys.exit("Объект по ссылке не является деревом.")
+    
+    tree_items = parse_tree_data(tree_bytes)
+    print_tree_items(tree_items)
+    
+    walk_history(repo_path, commit_id)
+
+main()
+
