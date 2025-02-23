@@ -1,5 +1,8 @@
 import os
 import sys 
+import re
+import zlib
+import binascii
 
 def show_git_branches(git_folder):
     heads_dir = os.path.join(git_folder, "refs", "heads")
@@ -22,3 +25,46 @@ def load_object(repo_dir, obj_id):
     header_text = header.decode("utf-8")
     obj_type, _ = header_text.split(" ", 1)
     return obj_type, data
+
+def extract_commit_info(commit_bytes):
+    commit_str = commit_bytes.decode("utf-8", errors="replace")
+    header, _, message = commit_str.partition("\n\n")
+    info = {"message": message.strip(), "parents": []}
+    for line in header.splitlines():
+        if line.startswith("tree "):
+            info["tree"] = line[5:].strip()
+        elif line.startswith("parent "):
+            info["parents"].append(line[7:].strip())
+        elif line.startswith("author "):
+            match = re.match(r"^author\s+(.+ <[^>]+>)", line)
+            info["author"] = match.group(1) if match else line[7:].strip()
+        elif line.startswith("committer "):
+            match = re.match(r"^committer\s+(.+ <[^>]+>)", line)
+            info["committer"] = match.group(1) if match else line[10:].strip()
+    return info
+
+def display_commit(info):
+    print("tree", info.get("tree", ""))
+    for parent in info.get("parents", []):
+        print("parent", parent)
+    print("author", info.get("author", ""))
+    print("committer", info.get("committer", ""))
+    print()
+    print(info.get("message", ""))
+
+def parse_tree_data(tree_bytes):
+    items = []
+    pos = 0
+    while pos < len(tree_bytes):
+        space_pos = tree_bytes.find(b' ', pos)
+        mode = tree_bytes[pos:space_pos].decode("utf-8")
+        pos = space_pos + 1
+        null_pos = tree_bytes.find(b'\x00', pos)
+        filename = tree_bytes[pos:null_pos].decode("utf-8")
+        pos = null_pos + 1
+        sha_raw = tree_bytes[pos:pos+20]
+        sha_hex = binascii.hexlify(sha_raw).decode("utf-8")
+        pos += 20
+        kind = "tree" if mode == "40000" else "blob"
+        items.append({"mode": mode, "type": kind, "filename": filename, "hash": sha_hex})
+    return items
