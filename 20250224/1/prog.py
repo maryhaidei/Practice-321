@@ -20,3 +20,10 @@ class Gamer:
         self.cord = (a+1 if a<9 else 0, b)
         print("Moved to", self.cord)
     
+class Monster: 
+    def __init__(self, a, b, hello): 
+        self.cord=(a,b)
+        self.hello=hello 
+        print("Added monster to", self.cord, "saying", self.hello)
+    def say(self): 
+        print(cowsay.cowsay(self.hello))
