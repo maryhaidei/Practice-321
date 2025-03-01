@@ -16,7 +16,7 @@ class Monster:
         self.name=name
         print("Added monster", self.name, "to", self.cord, "saying", self.hello)
     def say(self): 
-        print(cowsay.cowsay(self.hello))
+        print(cowsay.cowsay(self.hello, cow=self.name))
         
 class MUD: 
     def __init__(self): 
