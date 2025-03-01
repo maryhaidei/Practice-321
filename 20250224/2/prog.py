@@ -10,10 +10,11 @@ class Gamer:
         print("Moved to", self.cord)
     
 class Monster: 
-    def __init__(self, a, b, hello): 
+    def __init__(self, a, b, hello, name): 
         self.cord=(a,b)
         self.hello=hello 
-        print("Added monster to", self.cord, "saying", self.hello)
+        self.name=name
+        print("Added monster", self.name, "to", self.cord, "saying", self.hello)
     def say(self): 
         print(cowsay.cowsay(self.hello))
         
@@ -35,11 +36,11 @@ class MUD:
                 if self.monsters[x][y]!=0: 
                     self.monsters[x][y].say()
             elif 'addmon'==s[0]: 
-                if len(s)!=4: 
+                if len(s)!=5: 
                     print("Invalid arguments");continue 
                 try: 
-                    replaced= True if self.monsters[int(s[1])][int(s[2])] !=0 else False
-                    self.monsters[int(s[1])][int(s[2])]=Monster(int(s[1]), int(s[2]), s[3])
+                    replaced= True if self.monsters[int(s[2])][int(s[3])] !=0 else False
+                    self.monsters[int(s[2])][int(s[3])]=Monster(int(s[2]), int(s[3]), s[4], s[1])
                 except : 
                     print("Invalid arguments");continue
                 if replaced: 
@@ -50,3 +51,4 @@ class MUD:
 MUD().play()
                 
                 
+        
