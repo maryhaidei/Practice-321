@@ -38,6 +38,8 @@ class MUD:
             elif 'addmon'==s[0]: 
                 if len(s)!=5: 
                     print("Invalid arguments");continue 
+                    if s[1] not in cowsay.list_cows():
+                        print("Cannot add unknown monster");continue                    
                 try: 
                     replaced= True if self.monsters[int(s[2])][int(s[3])] !=0 else False
                     self.monsters[int(s[2])][int(s[3])]=Monster(int(s[2]), int(s[3]), s[4], s[1])
