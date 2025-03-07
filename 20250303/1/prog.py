@@ -1,4 +1,5 @@
 import cowsay
+import shlex
 from io import StringIO
 
 jgsbat=cowsay.read_dot_cow(StringIO("""
@@ -48,7 +49,7 @@ class MUD:
         print("<<< Welcome to Python-MUD 0.1 >>>")
         pl=Gamer(); direct=['right', 'left', 'up', 'down']; replaced=False
         while s:=input():
-            s=s.strip().split(); 
+            s=shlex.split(s); 
             if [True for i in direct if i==s[0]]: 
                 if len(s)>1: 
                     print("Invalid arguments");continue 
