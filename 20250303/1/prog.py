@@ -43,7 +43,9 @@ class MUD:
     
     def encounter(self, x, y): 
         self.monsters[x][y].say()
+        
     def play(self): 
+        print("<<< Welcome to Python-MUD 0.1 >>>")
         pl=Gamer(); direct=['right', 'left', 'up', 'down']; replaced=False
         while s:=input():
             s=s.strip().split(); 
