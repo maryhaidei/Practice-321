@@ -1,4 +1,5 @@
 import cowsay
+import shlex
 
 class Gamer:
     def __init__(self): 
@@ -27,7 +28,7 @@ class MUD:
     def play(self): 
         pl=Gamer(); direct=['right', 'left', 'up', 'down']; replaced=False
         while s:=input():
-            s=s.strip().split(); 
+            s=shlex.split(s); 
             if [True for i in direct if i==s[0]]: 
                 if len(s)>1: 
                     print("Invalid arguments");continue 
