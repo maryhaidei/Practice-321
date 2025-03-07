@@ -11,10 +11,12 @@ class Gamer:
         print("Moved to", self.cord)
     
 class Monster: 
-    def __init__(self, a, b, hello, name): 
+    def __init__(self, a, b, hello, name, hitpoints): 
         self.cord=(a,b)
         self.hello=hello 
-        self.name=name
+        self.name=name 
+        if hitpoints>0: self.hitpoints=hitpoints
+        else: raise ValueError
         print("Added monster", self.name, "to", self.cord, "saying", self.hello)
     def say(self): 
         print(cowsay.cowsay(self.hello, cow=self.name))
@@ -37,13 +39,20 @@ class MUD:
                 if self.monsters[x][y]!=0: 
                     self.monsters[x][y].say()
             elif 'addmon'==s[0]: 
-                if len(s)!=5: 
+                if len(s)!=9: 
                     print("Invalid arguments");continue 
                     if s[1] not in cowsay.list_cows():
-                        print("Cannot add unknown monster");continue                    
+                        print("Cannot add unknown monster");continue 
+                    p=['hello','hp','coords']
+                    if not any([True]+[False for i in p if i not in s]): 
+                        print("Invalid arguments");continue     
                 try: 
+                    coord=s.index('coords')
+                    phrase=s[s.index('hello')+1]
+                    hitpoints=s[s.index('hp')+1]
+                    a, b = int(s[coord+1]), int(s[coord]+2)
                     replaced= True if self.monsters[int(s[2])][int(s[3])] !=0 else False
-                    self.monsters[int(s[2])][int(s[3])]=Monster(int(s[2]), int(s[3]), s[4], s[1])
+                    self.monsters[int(s[2])][int(s[3])]=Monster(a, b, phrase, s[1], int(hitpoints))
                 except : 
                     print("Invalid arguments");continue
                 if replaced: 
