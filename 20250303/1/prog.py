@@ -1,4 +1,21 @@
 import cowsay
+from io import StringIO
+
+jgsbat=cowsay.read_dot_cow(StringIO("""
+$the_cow = <<EOC;
+$thoughts
+ $thoughts
+    ,_                    _,
+    ) '-._  ,_    _,  _.-' (
+    )  _.-'.|\\--//|.'-._  (
+     )'   .'\/o\/o\/'.   `(
+      ) .' . \====/ . '. (
+       )  / <<    >> \  (
+        '-._/``  ``\_.-'
+  jgs     __\\'--'//__
+         (((""`  `"")))
+EOC
+"""))
 
 class Gamer:
     def __init__(self): 
@@ -16,8 +33,10 @@ class Monster:
         self.name=name
         print("Added monster", self.name, "to", self.cord, "saying", self.hello)
     def say(self): 
-        print(cowsay.cowsay(self.hello, cow=self.name))
-        
+        if self.name!='jgsbat': 
+            print(cowsay.cowsay(self.hello, cow=self.name))
+        else : 
+            print(cowsay.cowsay(self.hello, cowfile=jgsbat))
 class MUD: 
     def __init__(self): 
         self.monsters=[[0 for _ in range(10)] for _ in range(10)]
@@ -38,7 +57,7 @@ class MUD:
             elif 'addmon'==s[0]: 
                 if len(s)!=5: 
                     print("Invalid arguments");continue 
-                    if s[1] not in cowsay.list_cows():
+                    if s[1] not in cowsay.list_cows()+['jgsbat']:
                         print("Cannot add unknown monster");continue                    
                 try: 
                     replaced= True if self.monsters[int(s[2])][int(s[3])] !=0 else False
